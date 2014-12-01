@@ -40,15 +40,15 @@
             },
             x_method = "mean",
             y_method = "mean",
-            filter = function (d) {
-                return true
-            },
+            filter = null,
             maxpoints = 0;
 
 
 
         function decimate(data) {
-            data = data.filter(filter);
+            if( filter ) {
+                data = data.filter(filter);
+            }
             function remap(data) {
                 return data.map(function (v) {
                     return {
@@ -81,8 +81,8 @@
                             ax = fsx(ax,x(data[j]));
                             ay = fsy(ay, y(data[j]));
                         }
-                        ax = ffx(ax);
-                        ay = ffy(ay);
+                        ax = ffx(ax,ppp);
+                        ay = ffy(ay,ppp);
                         r.push({
                             x: sx(ax),
                             y: sy(ay)
